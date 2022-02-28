@@ -1,7 +1,2 @@
-runtime: custom
 env: flex
-handlers:
-- url: /static
-  static_dir: static
-- url: /.*
-  script: main.app
+runtime: custom
