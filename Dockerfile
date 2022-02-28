@@ -1,13 +1,12 @@
 FROM tensorflow/tensorflow:2.5.1
 
-# Base image of python 3.8
-FROM python:3.8
+RUN mkdir /app
+ADD . /app
 
-COPY requirements.txt /
-RUN python3 -m pip install -r /requirements.txt
+WORKDIR /app
 
-COPY . /main
-WORKDIR /main
+RUN pip3 --no-cache-dir install -r requirements.txt
 
 EXPOSE 8080
-CMD [ "python" , "main.py"]
+
+ENTRYPOINT ["gunicorn","--bind=0.0.0.0:8080","main:app"]
